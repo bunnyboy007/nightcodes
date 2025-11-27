@@ -19,46 +19,376 @@
         }
 
         /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
-        }
+    /* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding:5px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    transition: padding 0.3s;
+}
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
 
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
 
-        .nav-links a {
-            color: #e5e5e5;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
+/* Navigation Brand (Logo + Text) */
+.nav-brand {
+    display: flex;
+    align-items: center;
 
-        .nav-links a:hover {
-            color: #8b5cf6;
-        }
+    z-index: 1001;
+}
 
+.nav-logo {
+    width: 70px;
+    height: 90px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.4));
+}
+
+
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #e5e5e5;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: #8b5cf6;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+}
+
+.menu-toggle .bar {
+    width: 28px;
+    height: 3px;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    margin: 4px 0;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    nav {
+        padding: 6px 0px;
+    }
+
+ 
+
+
+    .nav-logo {
+        width: 65px;
+        height: 65px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        flex-direction: column;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        padding: 120px 0 40px;
+        gap: 5px;
+        border-right: 1px solid rgba(139, 92, 246, 0.1);
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-links.active li:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    .nav-links.active li:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+
+    .nav-links.active li:nth-child(3) {
+        transition-delay: 0.2s;
+    }
+
+    .nav-links.active li:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+
+    .nav-links.active li:nth-child(5) {
+        transition-delay: 0.3s;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+        display: block;
+        padding: 20px 40px;
+        color: #e5e5e5;
+        position: relative;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #8b5cf6;
+    }
+
+    .nav-links a::before {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+        transition: width 0.3s;
+    }
+
+    .nav-links a:hover::before {
+        width: 50%;
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-6px, 7px);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-6px, -7px);
+    }
+}
+
+@media (max-width: 480px) {
+
+
+    .nav-logo {
+        width: 55px;
+        height: 55px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        padding: 100px 0 40px;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+        padding: 18px 30px;
+    }
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    nav {
+        padding: 6px 0px;
+    }
+
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        flex-direction: column;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        padding: 120px 0 40px;
+        gap: 5px;
+        border-right: 1px solid rgba(139, 92, 246, 0.1);
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-links.active li:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    .nav-links.active li:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+
+    .nav-links.active li:nth-child(3) {
+        transition-delay: 0.2s;
+    }
+
+    .nav-links.active li:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+
+    .nav-links.active li:nth-child(5) {
+        transition-delay: 0.3s;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+        display: block;
+        padding: 20px 40px;
+        color: #e5e5e5;
+        position: relative;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #8b5cf6;
+    }
+
+    .nav-links a::before {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+        transition: width 0.3s;
+    }
+
+    .nav-links a:hover::before {
+        width: 50%;
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    /* Hamburger Animation */
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-6px, 7px);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-6px, -7px);
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        padding: 100px 0 40px;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+        padding: 18px 30px;
+    }
+}
         /* Hero Section */
         .services-hero {
             min-height: 60vh;
@@ -425,15 +755,23 @@
     </style>
 </head>
 <body>
-    <nav>
+    <nav id="navbar">
+    <div class="nav-brand">
+        <img src="/pngtosvg(1)(1).png" alt="Night Codes Logo" class="nav-logo">
         <div class="logo">NIGHT CODES</div>
-        <ul class="nav-links">
-           <li><a href="/index.html">Home</a></li>
+    </div>
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+     <ul class="nav-links">
+        <li><a href="/index.html">Home</a></li>
             <li><a href="/service.html">Services</a></li>
             <li><a href="/about.html">About</a></li>
             <li><a href="/contectus.html">Contact</a></li>
         </ul>
-    </nav>
+</nav>
 
     <section class="services-hero">
         <div class="services-hero-content">
@@ -442,156 +780,197 @@
         </div>
     </section>
 
-    <section class="main-services">
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">🌐</div>
-                <h3>Web Development</h3>
-                <p>Build powerful, responsive websites that captivate your audience and drive conversions. From simple landing pages to complex web applications.</p>
-                <ul class="service-features">
-                    <li>Custom Website Design</li>
-                    <li>E-commerce Solutions</li>
-                    <li>Progressive Web Apps</li>
-                    <li>CMS Integration</li>
-                    <li>Performance Optimization</li>
-                </ul>
-                <a href="#contact" class="service-btn">Get Started →</a>
-            </div>
+<section class="main-services">
+    <div class="services-grid">
 
-            <div class="service-card">
-                <div class="service-icon">📱</div>
-                <h3>Mobile Apps</h3>
-                <p>Native and cross-platform mobile applications that deliver exceptional user experiences on iOS and Android devices.</p>
-                <ul class="service-features">
-                    <li>iOS & Android Development</li>
-                    <li>Cross-Platform Solutions</li>
-                    <li>UI/UX Design</li>
-                    <li>App Store Optimization</li>
-                    <li>Maintenance & Support</li>
-                </ul>
-                <a href="#contact" class="service-btn">Get Started →</a>
+        <!-- Web Development -->
+        <div class="service-card">
+            <div class="service-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="14" rx="2"/>
+                    <path d="M3 10h18"/>
+                </svg>
             </div>
-
-            <div class="service-card">
-                <div class="service-icon">☁️</div>
-                <h3>Cloud Solutions</h3>
-                <p>Scalable cloud infrastructure and migration services to ensure your business runs efficiently and grows seamlessly.</p>
-                <ul class="service-features">
-                    <li>Cloud Migration</li>
-                    <li>AWS, Azure & GCP</li>
-                    <li>DevOps Implementation</li>
-                    <li>Serverless Architecture</li>
-                    <li>Cloud Security</li>
-                </ul>
-                <a href="#contact" class="service-btn">Get Started →</a>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">🤖</div>
-                <h3>AI Integration</h3>
-                <p>Harness the power of artificial intelligence and machine learning to automate processes and gain valuable insights.</p>
-                <ul class="service-features">
-                    <li>Machine Learning Models</li>
-                    <li>Natural Language Processing</li>
-                    <li>Computer Vision</li>
-                    <li>Chatbots & Virtual Assistants</li>
-                    <li>Predictive Analytics</li>
-                </ul>
-                <a href="#contact" class="service-btn">Get Started →</a>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">🔒</div>
-                <h3>Cybersecurity</h3>
-                <p>Comprehensive security solutions to protect your digital assets, data, and infrastructure from evolving threats.</p>
-                <ul class="service-features">
-                    <li>Security Audits</li>
-                    <li>Penetration Testing</li>
-                    <li>Data Encryption</li>
-                    <li>Compliance Management</li>
-                    <li>24/7 Monitoring</li>
-                </ul>
-                <a href="#contact" class="service-btn">Get Started →</a>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">💼</div>
-                <h3>IT Consulting</h3>
-                <p>Strategic technology consulting to help you make informed decisions and optimize your IT infrastructure.</p>
-                <ul class="service-features">
-                    <li>Technology Strategy</li>
-                    <li>Digital Transformation</li>
-                    <li>System Architecture</li>
-                    <li>Process Optimization</li>
-                    <li>Vendor Selection</li>
-                </ul>
-                <a href="#contact" class="service-btn">Get Started →</a>
-            </div>
+            <h3>Web Development</h3>
+            <p>Modern and responsive websites built with clean code and professional UI.</p>
+            <ul class="service-features">
+                <li>Custom Websites</li>
+                <li>MERN Stack</li>
+                <li>Landing Pages</li>
+                <li>Frontend Development</li>
+                <li>SEO Friendly</li>
+            </ul>
+            <a href="#contact" class="service-btn">Get Started →</a>
         </div>
-    </section>
 
-    <section class="process">
-        <h2>Our Process</h2>
+        <!-- App Development -->
+        <div class="service-card">
+            <div class="service-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="7" y="2" width="10" height="20" rx="2"/>
+                    <circle cx="12" cy="18" r="1"/>
+                </svg>
+            </div>
+            <h3>App Development</h3>
+            <p>High-performance Android, iOS, and cross-platform apps using Flutter.</p>
+            <ul class="service-features">
+                <li>Flutter Apps</li>
+                <li>Cross-Platform</li>
+                <li>UI/UX Design</li>
+                <li>API Integration</li>
+                <li>App Optimization</li>
+            </ul>
+            <a href="#contact" class="service-btn">Get Started →</a>
+        </div>
+
+        <!-- Backend Development -->
+        <div class="service-card">
+            <div class="service-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="M7 9h.01M7 13h.01M11 9h6M11 13h6"/>
+                </svg>
+            </div>
+            <h3>Backend Development</h3>
+            <p>Robust and scalable backend systems using Node.js, Express, and MongoDB.</p>
+            <ul class="service-features">
+                <li>Node.js APIs</li>
+                <li>Express.js Backend</li>
+                <li>MongoDB Database</li>
+                <li>Authentication Systems</li>
+                <li>Cloud Deployment</li>
+            </ul>
+            <a href="#contact" class="service-btn">Get Started →</a>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="process">
+        <h2>Why Choose Night Codes</h2>
         <div class="process-steps">
             <div class="process-step">
-                <div class="step-number">1</div>
-                <h4>Discovery</h4>
-                <p>We learn about your business, goals, and challenges to create a tailored strategy.</p>
+                <div class="step-number">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>Expert Team</h4>
+                <p>Highly skilled developers and consultants with years of industry experience across multiple domains.</p>
             </div>
             <div class="process-step">
-                <div class="step-number">2</div>
-                <h4>Planning</h4>
-                <p>Detailed project roadmap with timelines, milestones, and resource allocation.</p>
+                <div class="step-number">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <h4>On-Time Delivery</h4>
+                <p>We value your time. Our proven project management ensures delivery within agreed timelines.</p>
             </div>
             <div class="process-step">
-                <div class="step-number">3</div>
-                <h4>Development</h4>
-                <p>Our expert team brings your vision to life with cutting-edge technology.</p>
+                <div class="step-number">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <h4>Quality Assurance</h4>
+                <p>Rigorous testing and quality checks ensure every deliverable meets the highest standards.</p>
             </div>
             <div class="process-step">
-                <div class="step-number">4</div>
-                <h4>Launch</h4>
-                <p>Seamless deployment and ongoing support to ensure continued success.</p>
+                <div class="step-number">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <h4>24/7 Support</h4>
+                <p>Continuous support and maintenance to keep your systems running smoothly at all times.</p>
             </div>
         </div>
     </section>
 
     <section class="technologies">
-        <h2>Technologies We Use</h2>
-        <p class="tech-intro">We leverage the latest and most powerful technologies to deliver exceptional results</p>
+        <h2>Industry Expertise</h2>
+        <p class="tech-intro">We deliver specialized solutions across diverse industries and business sectors</p>
         <div class="tech-grid">
             <div class="tech-item">
-                <div class="tech-item-icon">⚛️</div>
-                <p>React</p>
+                <div class="tech-item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                    </svg>
+                </div>
+                <p>E-Commerce</p>
             </div>
             <div class="tech-item">
-                <div class="tech-item-icon">📗</div>
-                <p>Node.js</p>
-            </div>
-     
-            <div class="tech-item">
-                <div class="tech-item-icon">☁️</div>
-                <p>AWS</p>
-            </div>
-            <div class="tech-item">
-                <div class="tech-item-icon">🔷</div>
-                <p>Docker</p>
+                <div class="tech-item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                </div>
+                <p>Healthcare</p>
             </div>
             <div class="tech-item">
-                <div class="tech-item-icon">🔺</div>
-                <p>MongoDB</p>
+                <div class="tech-item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="1" x2="12" y2="23"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <p>Finance</p>
             </div>
             <div class="tech-item">
-                <div class="tech-item-icon">🎯</div>
-                <p>TypeScript</p>
+                <div class="tech-item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                </div>
+                <p>Education</p>
             </div>
-                   <div class="tech-item">
-                <div class="tech-item-icon">🐍</div>
-                <p>Python</p>
+            <div class="tech-item">
+                <div class="tech-item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                </div>
+                <p>Real Estate</p>
             </div>
-   
+            <div class="tech-item">
+                <div class="tech-item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                    </svg>
+                </div>
+                <p>Travel</p>
+            </div>
+            <div class="tech-item">
+                <div class="tech-item-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                        <line x1="6" y1="6" x2="6.01" y2="6"/>
+                        <line x1="6" y1="18" x2="6.01" y2="18"/>
+                    </svg>
+                </div>
+                <p>Enterprise</p>
+            </div>
         </div>
     </section>
+
+
+
+
+
+
+
+    
 
     <section class="cta">
         <div class="cta-content">

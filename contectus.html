@@ -19,45 +19,375 @@
         }
 
         /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
-        }
+      nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding:5px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    transition: padding 0.3s;
+}
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
 
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
 
-        .nav-links a {
-            color: #e5e5e5;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
+/* Navigation Brand (Logo + Text) */
+.nav-brand {
+    display: flex;
+    align-items: center;
 
-        .nav-links a:hover {
-            color: #8b5cf6;
-        }
+    z-index: 1001;
+}
+
+.nav-logo {
+    width: 70px;
+    height: 90px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.4));
+}
+
+
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #e5e5e5;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: #8b5cf6;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+}
+
+.menu-toggle .bar {
+    width: 28px;
+    height: 3px;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    margin: 4px 0;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    nav {
+        padding: 6px 0px;
+    }
+
+ 
+
+
+    .nav-logo {
+        width: 65px;
+        height: 65px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        flex-direction: column;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        padding: 120px 0 40px;
+        gap: 5px;
+        border-right: 1px solid rgba(139, 92, 246, 0.1);
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-links.active li:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    .nav-links.active li:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+
+    .nav-links.active li:nth-child(3) {
+        transition-delay: 0.2s;
+    }
+
+    .nav-links.active li:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+
+    .nav-links.active li:nth-child(5) {
+        transition-delay: 0.3s;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+        display: block;
+        padding: 20px 40px;
+        color: #e5e5e5;
+        position: relative;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #8b5cf6;
+    }
+
+    .nav-links a::before {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+        transition: width 0.3s;
+    }
+
+    .nav-links a:hover::before {
+        width: 50%;
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-6px, 7px);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-6px, -7px);
+    }
+}
+
+@media (max-width: 480px) {
+
+
+    .nav-logo {
+        width: 55px;
+        height: 55px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        padding: 100px 0 40px;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+        padding: 18px 30px;
+    }
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    nav {
+        padding: 6px 0px;
+    }
+
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        flex-direction: column;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        padding: 120px 0 40px;
+        gap: 5px;
+        border-right: 1px solid rgba(139, 92, 246, 0.1);
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-links.active li:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    .nav-links.active li:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+
+    .nav-links.active li:nth-child(3) {
+        transition-delay: 0.2s;
+    }
+
+    .nav-links.active li:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+
+    .nav-links.active li:nth-child(5) {
+        transition-delay: 0.3s;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+        display: block;
+        padding: 20px 40px;
+        color: #e5e5e5;
+        position: relative;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #8b5cf6;
+    }
+
+    .nav-links a::before {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+        transition: width 0.3s;
+    }
+
+    .nav-links a:hover::before {
+        width: 50%;
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    /* Hamburger Animation */
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-6px, 7px);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-6px, -7px);
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        padding: 100px 0 40px;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+        padding: 18px 30px;
+    }
+}
 
         /* Hero Section */
         .contact-hero {
@@ -372,15 +702,23 @@
     </style>
 </head>
 <body>
-    <nav>
+    <nav id="navbar">
+    <div class="nav-brand">
+        <img src="/pngtosvg(1)(1).png" alt="Night Codes Logo" class="nav-logo">
         <div class="logo">NIGHT CODES</div>
-        <ul class="nav-links">
+    </div>
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+     <ul class="nav-links">
         <li><a href="/index.html">Home</a></li>
             <li><a href="/service.html">Services</a></li>
             <li><a href="/about.html">About</a></li>
             <li><a href="/contectus.html">Contact</a></li>
         </ul>
-    </nav>
+</nav>
 
     <section class="contact-hero">
         <div class="contact-hero-content">
@@ -429,39 +767,75 @@
 
             <!-- Contact Info -->
             <div class="contact-info">
-                <div class="info-card">
-                    <div class="info-icon">📧</div>
-                    <h3>Email Us</h3>
-                    <p>Have a question? Drop us an email and we'll get back to you within 24 hours.</p>
-                    <p><a href="mailto:info@nightcodes.com">info@nightcodes.com</a></p>
-                    <p><a href="mailto:support@nightcodes.com">support@nightcodes.com</a></p>
-                </div>
+  <div class="info-card">
+    <div class="info-icon">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+        </svg>
+    </div>
+    <h3>Email Us</h3>
+    <p>Have a question? Drop us an email and we'll get back to you within 24 hours.</p>
+    <p><a href="mailto:aqthe99@gmail.com">aqthe99@gmail.com</a></p>
+</div>
+<div class="info-card">
+    <div class="info-icon">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.33 1.61.61 2.38a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.68-1.68a2 2 0 0 1 2.11-.45c.77.28 1.57.48 2.38.61a2 2 0 0 1 1.72 2z"/>
+        </svg>
+    </div>
+    <h3>Call Us</h3>
+    <p>Speak directly with our team</p>
+    <p><a href="tel:+917976225614">+91 7976225614</a></p>
+</div>
 
-                <div class="info-card">
-                    <div class="info-icon">📞</div>
-                    <h3>Call Us</h3>
-                    <p>Speak directly with our team. We're available Monday to Friday, 9 AM - 6 PM.</p>
-                    <p><a href="tel:+1234567890">+1 (234) 567-890</a></p>
-                    <p><a href="tel:+1234567891">+1 (234) 567-891</a></p>
-                </div>
 
-                <div class="info-card">
+                <!-- <div class="info-card">
                     <div class="info-icon">📍</div>
                     <h3>Visit Us</h3>
                     <p>123 Tech Avenue, Innovation District<br>Silicon Valley, CA 94025<br>United States</p>
-                </div>
+                </div> -->
 
-                <div class="info-card">
-                    <div class="info-icon">🌐</div>
-                    <h3>Follow Us</h3>
-                    <p>Stay connected with us on social media</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">𝕏</a>
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">📷</a>
-                    </div>
-                </div>
+<div class="info-card">
+    <div class="info-icon">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M16 8a6 6 0 0 1-8 8 6 6 0 0 1 8-8z"/>
+        </svg>
+    </div>
+    <h3>Follow Us</h3>
+    <p>Stay connected with us on social media</p>
+    <div class="social-links">
+        <!-- X / Twitter -->
+        <a href="#" class="social-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="#" class="social-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="2" ry="2"/>
+                <path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-6a6 6 0 0 1 6-6z"/>
+            </svg>
+        </a>
+        <!-- Facebook -->
+        <a href="#" class="social-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+        </a>
+        <!-- Instagram -->
+        <a href="#" class="social-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+            </svg>
+        </a>
+    </div>
+</div>
+
             </div>
         </div>
     </section>
